@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- path to ros bag folder -->
+  <arg name="bag_path" value="/media/kaveh/T7/data/OrcVIO2/"/>
+  <!-- bag topics to load -->
+  <arg name="bag_topics" value="/orcvio/quadrics /firefly_sbx/vio/posestamped"/>
+
+
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- load bag 1 -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+  <!-- remap from node topic names to desired names -->
+  <remap from="/orcvio/quadrics" to="/robot1/marker_array"/>                                      
+  <remap from="/firefly_sbx/vio/posestamped" to="/robot1/pose"/>
+  <!-- node plays loads OrcVIO bags -->
+  <node 
+    pkg="rosbag"
+    type="play"
+    name="player1"
+    output="screen"
+    args="$(arg bag_path)robot1.bag --quiet --topics $(arg bag_topics)">       
+  </node>
+
+  <!-- remap from node topic names to desired names -->
+  <remap from="robot/marker_array" to="/robot1/marker_array"/>
+  <remap from="robot/landmarks" to="/robot1/landmarks"/>
+  <!-- node that converts MarkerArray to PointCloud2  -->
+  <node
+    pkg="clipper"
+    type="marker2pt2"
+    name="converter1"
+    output="screen">    
+  </node>
+
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- load bag 2 -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+  <!-- remap from node topic names to desired names -->
+  <remap from="/orcvio/quadrics" to="/robot2/marker_array"/>                                      
+  <remap from="/firefly_sbx/vio/posestamped" to="/robot2/pose"/>
+  <!-- node plays loads OrcVIO bags -->
+  <node 
+    pkg="rosbag"
+    type="play"
+    name="player2"
+    output="screen"
+    args="$(arg bag_path)robot2.bag --quiet --topics $(arg bag_topics)">       
+  </node>
+
+  <!-- remap from node topic names to desired names -->
+  <remap from="robot/marker_array" to="/robot2/marker_array"/>
+  <remap from="robot/landmarks" to="/robot2/landmarks"/>
+  <!-- node that converts MarkerArray to PointCloud2  -->
+  <node
+    pkg="clipper"
+    type="marker2pt2"
+    name="converter2"
+    output="screen">    
+  </node>
+
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- load bag 3 -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+  <!-- remap from node topic names to desired names -->
+  <remap from="/orcvio/quadrics" to="/robot3/marker_array"/>                                      
+  <remap from="/firefly_sbx/vio/posestamped" to="/robot3/pose"/>
+  <!-- node plays loads OrcVIO bags -->
+  <node 
+    pkg="rosbag"
+    type="play"
+    name="player3"
+    output="screen"
+    args="$(arg bag_path)robot3.bag --quiet --topics $(arg bag_topics)">       
+  </node>
+
+  <!-- remap from node topic names to desired names -->
+  <remap from="robot/marker_array" to="/robot3/marker_array"/>
+  <remap from="robot/landmarks" to="/robot3/landmarks"/>
+  <!-- node that converts MarkerArray to PointCloud2  -->
+  <node
+    pkg="clipper"
+    type="marker2pt2"
+    name="converter3"
+    output="screen">    
+  </node>
+
+
+</launch>

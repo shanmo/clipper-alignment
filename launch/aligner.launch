@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- 
+  topics to run clipper aligner should be in the form (e.g., for 2 robots)  
+  "robot1/landmarks"
+  "robot1/pose"
+  "robot2/landmarks"
+  "robot2/pose" 
+  ...
+  
+  robot1 is set as the reference robot below
+  all other robots will be aligned to this robot
+  -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- run clipper alignment -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+  <node pkg="clipper" type="aligner" name="frame_aligner" output="screen">
+    <!-- set the number of robots -->
+    <param name="num_robots" value="3"/>
+    <param name="clipper_sigma" value="3"/>
+    <param name="clipper_epsilon" value="6"/>
+    <param name="clipper_mindist" value="2"/>
+  
+  </node>
+
+
+</launch>

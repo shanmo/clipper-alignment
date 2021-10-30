@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>clipper</name>
+  <version>1.0.0</version>
+  <description>The clipper alignment package</description>
+
+  <maintainer email="kavehfathian@gmail.com">Kaveh Fathian</maintainer>
+  <license>MIT</license>
+  <url type="website">https://github.com/KavehFathian/clipper-alignment</url>
+
+  <depend>roscpp</depend>
+  <depend>tf2_eigen</depend>
+  <depend>pcl_ros</depend>
+  <depend>pcl_conversions</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>

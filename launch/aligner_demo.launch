@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- load OrcVIO bags -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <!-- <include file="$(find clipper)/launch/load_orcvio_bags.launch" /> -->
+  <include file="$(find clipper)/launch/load_orcvio_bags_sim.launch" />
+
+  <!-- 
+  topics to run clipper aligner should be in the form (e.g., for 2 robots)  
+  "robot1/landmarks"
+  "robot1/pose"
+  "robot2/landmarks"
+  "robot2/pose" 
+  ...
+  
+  robot1 is set as the reference robot below
+  all other robots will be aligned to this robot
+  -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- run clipper alignment -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+  <node pkg="clipper" type="aligner" name="frame_aligner" output="screen">
+    <!-- set params -->
+    <param name="num_robots" value="3"/>
+    <param name="clipper_sigma" value="3"/>
+    <param name="clipper_epsilon" value="6"/>
+    <param name="clipper_mindist" value="2"/>
+  
+  </node>
+
+
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- visualization -->
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find clipper)/cfg/default.rviz" />
+
+</launch>
