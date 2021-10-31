@@ -266,7 +266,7 @@ void Aligner::timer_cb(const ros::TimerEvent& event)
   for (size_t i=1; i<num_robots; ++i)
   {
     // don't do anything until received initial robot pose
-    if (!r_first_pose_[i]) return;
+    if (!r_first_pose_[i]) continue;
 
     if (r_new_data_[0] || r_new_data_[i]) {
       if (r_new_data_[i]) r_new_data_[i] = false; //reset flag
